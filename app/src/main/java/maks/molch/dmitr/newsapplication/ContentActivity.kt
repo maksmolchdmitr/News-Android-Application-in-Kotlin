@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -60,32 +61,36 @@ fun ContentScreen(newsItem: NewsItem) {
 
 @Composable
 fun Content(newsItem: NewsItem) {
-    Row(
-        modifier = Modifier
-            .padding(5.dp)
-    ) {
-        val textModifier = Modifier
-            .padding(3.dp)
-            .border(2.dp, Color.Gray, CircleShape)
-            .background(Color.LightGray, CircleShape)
-            .fillMaxWidth()
-            .padding(30.dp)
-        val textUnit = TextUnit(3f, TextUnitType.Em)
-        Text(
-            text = "Title: ${newsItem.title}",
-            fontSize = textUnit,
-            fontWeight = FontWeight.Bold,
-            modifier = textModifier
-                .weight(2f, true)
-        )
-        Text(
-            text = toCreatorsText(newsItem.creator),
-            fontSize = textUnit,
-            fontWeight = FontWeight.Bold,
-            modifier = textModifier
-                .weight(1f, true)
-        )
-        LazyColumn {
+    Column {
+        Row(
+            modifier = Modifier
+                .padding(5.dp)
+        ) {
+            val textModifier = Modifier
+                .padding(3.dp)
+                .border(2.dp, Color.Gray, CircleShape)
+                .background(Color.LightGray, CircleShape)
+                .fillMaxWidth()
+                .padding(30.dp)
+            val textUnit = TextUnit(3f, TextUnitType.Em)
+            Text(
+                text = "Title: ${newsItem.title}",
+                fontSize = textUnit,
+                fontWeight = FontWeight.Bold,
+                modifier = textModifier
+                    .weight(2f, true)
+            )
+            Text(
+                text = toCreatorsText(newsItem.creator),
+                fontSize = textUnit,
+                fontWeight = FontWeight.Bold,
+                modifier = textModifier
+                    .weight(1f, true)
+            )
+        }
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             items(listOf(newsItem)) {
                 Text(text = newsItem.content ?: "Empty")
             }
