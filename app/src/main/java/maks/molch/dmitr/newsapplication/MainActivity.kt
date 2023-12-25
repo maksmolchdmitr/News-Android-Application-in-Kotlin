@@ -194,34 +194,7 @@ class MainActivity : ComponentActivity() {
                     onItemCardClick(newsItem)
                 },
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(5.dp)
-            ) {
-                val textModifier = Modifier
-                    .padding(3.dp)
-                    .border(2.dp, Color.Gray, CircleShape)
-                    .background(Color.LightGray, CircleShape)
-                    .fillMaxWidth()
-                    .padding(30.dp)
-                val textUnit = TextUnit(3f, TextUnitType.Em)
-                Text(
-                    text = "Title: ${newsItem.title}",
-                    fontSize = textUnit,
-                    fontWeight = FontWeight.Bold,
-                    modifier = textModifier
-                        .weight(2f, true)
-                )
-                newsItem.creator?.let {
-                    Text(
-                        text = toCreatorsText(it),
-                        fontSize = textUnit,
-                        fontWeight = FontWeight.Bold,
-                        modifier = textModifier
-                            .weight(1f, true)
-                    )
-                }
-            }
+            MainContentView(newsItem)
             newsItem.description?.let {
                 Text(
                     text = it,
@@ -230,6 +203,40 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .padding(all = 5.dp)
                         .background(Color.DarkGray)
+                )
+            }
+        }
+    }
+
+    @Composable
+    fun MainContentView(newsItem: NewsItem) {
+        Row(
+            modifier = Modifier
+                .padding(5.dp)
+        ) {
+            val textModifier = Modifier
+                .padding(3.dp)
+                .border(2.dp, Color.Gray, CircleShape)
+                .background(Color.LightGray, CircleShape)
+                .fillMaxWidth()
+                .padding(30.dp)
+            val textUnit = TextUnit(3f, TextUnitType.Em)
+            newsItem.title?.let {
+                Text(
+                    text = "Title: ${it}",
+                    fontSize = textUnit,
+                    fontWeight = FontWeight.Bold,
+                    modifier = textModifier
+                        .weight(2f, true)
+                )
+            }
+            newsItem.creator?.let {
+                Text(
+                    text = toCreatorsText(it),
+                    fontSize = textUnit,
+                    fontWeight = FontWeight.Bold,
+                    modifier = textModifier
+                        .weight(1f, true)
                 )
             }
         }
