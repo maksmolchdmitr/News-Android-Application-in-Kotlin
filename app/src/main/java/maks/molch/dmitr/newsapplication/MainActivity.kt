@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -78,14 +76,27 @@ fun UserInput(newsData: MutableState<List<NewsItem>>) {
     Row(
         Modifier
             .background(color = Color.Blue)
+            .height(128.dp)
             .fillMaxWidth()
     ) {
-        KeyWordsTextField(userInputValue)
-        Column {
+        Column(
+            Modifier.weight(3f)
+        ) {
+            KeyWordsTextField(userInputValue)
+        }
+        Column(
+            Modifier
+                .weight(1.5f)
+                .fillMaxSize()
+        ) {
             LanguageCheckBox(languageName = "ru", languagesState)
             LanguageCheckBox(languageName = "en", languagesState)
         }
-        SearchButton(userInputValue, languagesState, newsData)
+        Column(
+            Modifier.weight(1.5f)
+        ) {
+            SearchButton(userInputValue, languagesState, newsData)
+        }
     }
 }
 
@@ -103,7 +114,7 @@ fun SearchButton(
                 newsData
             )
         },
-        modifier = Modifier.size(128.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
         Text(text = "Find")
     }
@@ -119,9 +130,7 @@ fun KeyWordsTextField(
             userInputValue.value = it
         },
         placeholder = { Text(text = "Enter key words : )") },
-        modifier = Modifier
-            .height(128.dp)
-            .width(200.dp)
+        modifier = Modifier.fillMaxSize()
     )
 }
 
