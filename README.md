@@ -1,6 +1,14 @@
 # Using example
 
 
+
+https://github.com/maksmolchdmitr/News-Android-Application-in-Kotlin/assets/62752481/fbeffe41-cbb1-4ec4-9534-9f742901e8eb
+
+
+
+# Using old version example
+
+
 https://github.com/maksmolchdmitr/News-Android-Application-in-Kotlin/assets/62752481/898a44ed-a5fd-4e68-91f2-b2f8f502229a
 
 
