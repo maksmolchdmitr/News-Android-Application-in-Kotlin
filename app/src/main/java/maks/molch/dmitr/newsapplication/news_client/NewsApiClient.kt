@@ -1,13 +1,20 @@
 package maks.molch.dmitr.newsapplication.news_client
 
 import maks.molch.dmitr.newsapplication.news_client.data.NewsItem
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object NewsApiClient {
+    private val okHttpClient = OkHttpClient.Builder()
+        .callTimeout(10, TimeUnit.SECONDS)
+        .build()
+
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://newsdata.io")
         .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
         .build()
 
     private val service = retrofit.create(NewsApiService::class.java)

@@ -32,7 +32,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import maks.molch.dmitr.newsapplication.news_client.NewsApiClient
 import maks.molch.dmitr.newsapplication.news_client.data.NewsItem
 import maks.molch.dmitr.newsapplication.ui.theme.NewsApplicationTheme
@@ -199,13 +201,14 @@ fun NewsItemCard(newsItem: NewsItem) {
     }
 }
 
+@OptIn(DelicateCoroutinesApi::class)
 fun onSearch(
     keyWords: String,
     languageState: Set<String>,
     newsData: MutableState<List<NewsItem>>
 ) {
     Log.d("", "Languages: ${languageState.joinToString(", ")}")
-    runBlocking {
+    GlobalScope.launch {
         newsData.value = NewsApiClient.getNews(
             keyWords,
             languageState
